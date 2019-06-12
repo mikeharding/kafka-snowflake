@@ -16,4 +16,28 @@ resource "aws_instance" "kafka" {
     tags = {
     Name = "Kafka Connector Demo"
   }
+
+  connection {
+      type     = "ssh"
+      host     = self.public_ip
+      user     = "centos"
+      private_key = file(var.private_key_path)
+    }
+
+  provisioner "file" {
+  source      = "files/bootstrap.sh"
+  destination = "bootstrap.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x bootstrap.sh",
+      "./bootstrap.sh",
+    ]
+  }
+}
+
+
+output "public_ip" {
+  value = aws_instance.kafka.public_ip
 }

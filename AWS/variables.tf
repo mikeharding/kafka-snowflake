@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "shared_credentials_file" {
-  default = "/c/Users/mharding/.aws/credentials"
+  default = "~/.aws/credentials"
 }
 
 variable "ami" {
@@ -11,13 +11,18 @@ variable "ami" {
 }
 
 variable "instance_type" {
-  default = "t2.micro"
+  default = "m5a.xlarge"
 }
 
 variable "key_name" {
   default = "terraform.pub"
 }
 
+// Set the path to the location of your public key
 variable "public_key_path" {
-  default = "..\\..\\terraform.pub"
+  default = "~/bin/ssh-keys/snowflake-mbp.pub"
+}
+
+variable "private_key_path" {
+  default = "~/bin/ssh-keys/snowflake-mbp.pem"
 }

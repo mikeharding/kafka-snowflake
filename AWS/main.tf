@@ -16,13 +16,22 @@ resource "aws_instance" "kafka" {
     tags = {
     Name = "Kafka Connector Demo"
   }
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    delete_on_termination = true
+  }
 
   connection {
       type     = "ssh"
       host     = self.public_ip
       user     = "centos"
       private_key = file(var.private_key_path)
-    }
+  }
+
+  provisioner "file" {
+  source      = "../common/snowflake-kafka-connector-0.3.jar"
+  destination = "snowflake-kafka-connector-0.3.jar"
+  }
 
   provisioner "file" {
   source      = "files/bootstrap.sh"
@@ -32,9 +41,10 @@ resource "aws_instance" "kafka" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x bootstrap.sh",
-      "./bootstrap.sh",
+      "./bootstrap.sh > bootstrap.log",
     ]
   }
+
 }
 
 

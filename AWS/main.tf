@@ -29,11 +29,6 @@ resource "aws_instance" "kafka" {
   }
 
   provisioner "file" {
-  source      = "../common/snowflake-kafka-connector-0.3.jar"
-  destination = "snowflake-kafka-connector-0.3.jar"
-  }
-
-  provisioner "file" {
   source      = "files/bootstrap.sh"
   destination = "bootstrap.sh"
   }

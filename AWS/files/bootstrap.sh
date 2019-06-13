@@ -31,6 +31,7 @@ sudo yum clean all
 
 sudo yum -y install confluent-platform-oss-2.11
 
+wget http://central.maven.org/maven2/com/snowflake/snowflake-kafka-connector/0.3/snowflake-kafka-connector-0.3.jar
 sudo mkdir /usr/share/java/kafka-connect-snowflake
 
 sudo mv snowflake-kafka-connector-0.3.jar   /usr/share/java/kafka-connect-snowflake/snowflake-kafka-connector-0.3.jar

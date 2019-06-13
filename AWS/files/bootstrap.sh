@@ -35,6 +35,20 @@ sudo mkdir /usr/share/java/kafka-connect-snowflake
 
 sudo mv snowflake-kafka-connector-0.3.jar   /usr/share/java/kafka-connect-snowflake/snowflake-kafka-connector-0.3.jar
 
+sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+sudo python get-pip.py
+sudo pip install Faker
+
+touch gen-data.py
+
+echo "from faker import Faker" > gen-data.py
+echo "from faker.providers import internet" >> gen-data.py
+echo "import datetime" >> gen-data.py
+echo "fake = Faker()" >> gen-data.py
+echo "fake.add_provider(internet)" >> gen-data.py
+echo "for _ in range(100):" >> gen-data.py
+echo "    print(str(datetime.datetime.now()) + ',' + fake.name() + ',' + fake.ipv4_private())" >> gen-data.py
 
 
-confluent start 
+
+confluent schema-registry start 

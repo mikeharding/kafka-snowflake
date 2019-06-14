@@ -41,7 +41,6 @@ sudo python get-pip.py
 sudo pip install Faker
 
 touch gen-data.py
-
 echo "from faker import Faker" > gen-data.py
 echo "from faker.providers import internet" >> gen-data.py
 echo "import datetime" >> gen-data.py
@@ -49,6 +48,11 @@ echo "fake = Faker()" >> gen-data.py
 echo "fake.add_provider(internet)" >> gen-data.py
 echo "for _ in range(100):" >> gen-data.py
 echo "    print(str(datetime.datetime.now()) + ',' + fake.name() + ',' + fake.ipv4_private())" >> gen-data.py
+
+touch read-topic.sh
+echo "kafka-avro-console-consumer --bootstrap-server localhost:9092 --topic connect-test --from-beginning" > read-topic.sh
+sudo chmod +x read-topic.sh
+
 
 
 

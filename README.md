@@ -17,7 +17,7 @@ Once deployed and configured, the Snowflake Connector for Apache Kafka will cons
 
 Currently, the only cloud provider supported is AWS.
 
-### Installation
+## Installation
 
 To run the examples, you will first need to install and configure, or have access, to the following software:
 
@@ -27,27 +27,27 @@ To run the examples, you will first need to install and configure, or have acces
 
 It is assumed that you are able to install and configure Terraform, configure credentials for AWS, and have a Snowflake account with the required privileges to perform the configuration of the Snowflake database and Snowflake Connector for Kafka.
 
-#### AWS Account
+### AWS Account
 
 You should create an IAM role for Terraform in the AWS Console and generate access keys for that role.  i
 
 Install the AWS CLI and configure it using [these instructions](<https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html>). Terraform will then use the credentials configured for the CLI.
 
-#### Terraform
+### Terraform
 
 Install Terraform and configure it using [these instructions](<https://learn.hashicorp.com/terraform/getting-started/install.html>).
 
-#### Snowflake
+### Snowflake
 
 You should have access to a Snowflake account and have the required privileges documented [here](<https://docs.snowflake.net/manuals/user-guide/kafka-connector.html>).
 
 You can get a Snowflake trial account [here](<https://trial.snowflake.com>).
 
-### Configuration
+## Configuration
 
 You will need to edit variables.tf located in the cloud provider subdirectory
 
-### Usage
+## Usage
 
 Navigate to the cloud provider subdirectory and execute the following commands at the OS prompt:
 

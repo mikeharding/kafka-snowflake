@@ -15,9 +15,32 @@ A bash shell script is provided to configure the following components:
 
 Once deployed and configured, the Snowflake Connector for Apache Kafka will consume data from a Kafka topic and load the data into a table in a Snowflake account.
 
+Currently, the only cloud provider supported is AWS.
+
 ### Installation
 
-To create an end to end pipeline, you will first need the following:
+To run the examples, you will first need to install and configure, or have access, to the following software:
 
-1. Terraform - installed and configured with AWS access keys.
-2. A Snowflake account - use recommended configuration for the Connector for Apache Kafka as described in the Snowflake documentation.
+1. An AWS account. Azure and GCP not yet supported.
+2. Terraform - installed and configured with AWS access keys.
+3. A Snowflake account - use recommended configuration for the Connector for Apache Kafka as described in the Snowflake documentation.
+
+It is assumed that you are able to install and configure Terraform, configure credentials for AWS, and have a Snowflake account with the required privileges to perform the configuration of the Snowflake database and Snowflake Connector for Kafka.
+
+#### AWS Account
+
+You should create an IAM role for Terraform in the AWS Console and generate access keys for that role.  i
+
+Install the AWS CLI and configure it using [these instructions](<https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html>). Terraform will then use the credentials configured for the CLI.
+
+#### Terraform
+
+Install Terraform and configure it using [these instructions](<https://learn.hashicorp.com/terraform/getting-started/install.html>).
+
+### Configuration
+
+You will need to edit variables.tf located in the cloud provider subdirectory
+
+### Usage
+
+Navigate to the cloud provider subdirectory and execute:

@@ -37,10 +37,33 @@ Install the AWS CLI and configure it using [these instructions](<https://docs.aw
 
 Install Terraform and configure it using [these instructions](<https://learn.hashicorp.com/terraform/getting-started/install.html>).
 
+#### Snowflake
+
+You should have access to a Snowflake account and have the required privileges documented [here](<https://docs.snowflake.net/manuals/user-guide/kafka-connector.html>).
+
+You can get a Snowflake trial account [here](<https://trial.snowflake.com>).
+
 ### Configuration
 
 You will need to edit variables.tf located in the cloud provider subdirectory
 
 ### Usage
 
-Navigate to the cloud provider subdirectory and execute:
+Navigate to the cloud provider subdirectory and execute the following commands at the OS prompt:
+
+```
+terraform init
+terraform plan
+```
+
+If there are no errors, execute this command:
+
+```
+terraform apply
+```
+
+To remove the provisioned infrastructure, execute this command:
+```
+terraform destroy
+```
+

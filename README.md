@@ -51,19 +51,19 @@ You will need to edit variables.tf located in the cloud provider subdirectory
 
 Navigate to the cloud provider subdirectory and execute the following commands at the OS prompt:
 
-```
+```bash
 terraform init
 terraform plan
 ```
 
 If there are no errors, execute this command:
 
-```
+```bash
 terraform apply
 ```
 
 To remove the provisioned infrastructure, execute this command:
-```
+
+```bash
 terraform destroy
 ```
-

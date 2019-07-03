@@ -1,6 +1,8 @@
 #!/bin/bash
 
 sudo yum -y install wget
+sudo yum -y install epel-release
+sudo yum -y install jq
 
 wget https://mharding-java8.s3-us-west-2.amazonaws.com/jdk-8u211-linux-x64.rpm
 
@@ -9,7 +11,6 @@ sudo rpm -Uvh jdk-8u211-linux-x64.rpm
 export JAVA_HOME=/usr/java/jdk1.8.0_211-amd64
 export PATH=$PATH:/usr/java/jdk1.8.0_211-amd64/bin
 
-#sudo rpm --import https://packages.confluent.io/rpm/4.0/archive.key
 sudo rpm --import https://packages.confluent.io/rpm/5.2/archive.key
 
 sudo echo "[Confluent.dist]
@@ -26,21 +27,6 @@ gpgcheck=1
 gpgkey=https://packages.confluent.io/rpm/5.2/archive.key
 enabled=1" > confluent.repo
 
-
-#sudo echo "[Confluent.dist]
-#name=Confluent repository (dist)
-#baseurl=https://packages.confluent.io/rpm/4.0/7
-#gpgcheck=1
-#gpgkey=https://packages.confluent.io/rpm/4.0/archive.key
-#enabled=1
-
-#[Confluent]
-#name=Confluent repository
-#baseurl=https://packages.confluent.io/rpm/4.0
-#gpgcheck=1
-#gpgkey=https://packages.confluent.io/rpm/4.0/archive.key
-#enabled=1" > confluent.repo
-
 sudo mv confluent.repo /etc/yum.repos.d/
 sudo yum clean all
 
@@ -54,21 +40,41 @@ sudo mv snowflake-kafka-connector-0.3.jar /usr/share/java/kafka-connect-snowflak
 sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
 sudo python get-pip.py
 sudo pip install Faker
+sudo pip install request
 
-touch gen-data.py
-echo "from faker import Faker" > gen-data.py
-echo "from faker.providers import internet" >> gen-data.py
-echo "import datetime" >> gen-data.py
-echo "fake = Faker()" >> gen-data.py
-echo "fake.add_provider(internet)" >> gen-data.py
-echo "for _ in range(100):" >> gen-data.py
-echo "    print(str(datetime.datetime.now()) + ',' + fake.name() + ',' + fake.ipv4_private())" >> gen-data.py
+touch gen-text.py
+echo "from faker import Faker" > gen-text.py
+echo "from faker.providers import internet" >> gen-text.py
+echo "import datetime" >> gen-text.py
+echo "fake = Faker()" >> gen-text.py
+echo "fake.add_provider(internet)" >> gen-text.py
+echo "for _ in range(100):" >> gen-text.py
+echo "    print(str(datetime.datetime.now()) + ',' + fake.name() + ',' + fake.ipv4_private())" >> gen-text.py
+
+touch gen-json.py
+echo "from faker import Faker" > gen-json.py
+echo "from faker.providers import internet" >> gen-json.py
+echo "import datetime" >> gen-json.py
+echo "fake = Faker()" >> gen-json.py
+echo "fake.add_provider(internet)" >> gen-json.py
+echo "for _ in range(100):" >> gen-json.py
+echo "    print('{\"timestamp\":\"' + str(datetime.datetime.now()) + '\",\"name\":\"' + fake.name() + '\",\"ip\":\"' + fake.ipv4_private() + '\"}')" >> gen-json.py
+
+touch produce-text.sh
+echo "python gen-text.py >> strings.txt" > produce-text.sh
+sudo chmod +x produce-text.sh
+
+touch produce-json.sh
+echo "python gen-json.py >> json.txt" > produce-json.sh
+echo "cat json.txt | kafka-console-producer --broker-list localhost:9092 --topic demotopic" >> produce-json.sh
+sudo chmod +x produce-json.sh
 
 touch read-topic.sh
-echo "sudo kafka-avro-console-consumer --bootstrap-server localhost:9092 --topic demotopic --from-beginning" > read-topic.sh
+echo "sudo kafka-console-consumer --bootstrap-server localhost:9092 --topic demotopic" > read-topic.sh
 sudo chmod +x read-topic.sh
 
+sudo sed -i 's/key.converter=io.confluent.connect.avro.AvroConverter/key.converter=org.apache.kafka.connect.json.JsonConverter/' /etc/schema-registry/connect-avro-distributed.properties
+sudo sed -i 's,key.converter.schema.registry.url=http://localhost:8081,key.converter.schemas.enable=false,' /etc/schema-registry/connect-avro-distributed.properties
+sudo sed -i 's/value.converter=io.confluent.connect.avro.AvroConverter/value.converter=org.apache.kafka.connect.json.JsonConverter/' /etc/schema-registry/connect-avro-distributed.properties
+sudo sed -i 's,value.converter.schema.registry.url=http://localhost:8081,value.converter.schemas.enable=false,' /etc/schema-registry/connect-avro-distributed.properties
 
-
-
-confluent start 

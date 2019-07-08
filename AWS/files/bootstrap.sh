@@ -11,7 +11,7 @@ sudo rpm -Uvh jdk-8u211-linux-x64.rpm
 export JAVA_HOME=/usr/java/jdk1.8.0_211-amd64
 export PATH=$PATH:/usr/java/jdk1.8.0_211-amd64/bin
 
-sudo rpm --import https://packages.confluent.io/rpm/5.2/archive.key
+propersudo rpm --import https://packages.confluent.io/rpm/5.2/archive.key
 
 sudo echo "[Confluent.dist]
 name=Confluent repository (dist)
@@ -37,8 +37,8 @@ sudo mkdir /usr/share/java/kafka-connect-snowflake
 
 sudo mv snowflake-kafka-connector-0.3.jar /usr/share/java/kafka-connect-snowflake/snowflake-kafka-connector-0.3.jar
 
-sudo curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-sudo python get-pip.py
+sudo yum -y install epel-release
+sudo yum -y install python-pip
 sudo pip install Faker
 sudo pip install request
 

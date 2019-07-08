@@ -62,6 +62,8 @@ If there are no errors, execute this command:
 terraform apply
 ```
 
+Enter __yes__ when prompted.
+
 To remove the provisioned infrastructure, execute this command:
 
 ```bash

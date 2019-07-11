@@ -22,7 +22,7 @@ Currently, the only cloud provider supported is AWS.
 To run the examples, you will first need to install and configure, or have access, to the following software:
 
 1. An AWS account. Azure and GCP not yet supported.
-2. Terraform - installed and configured with AWS access keys.
+2. Terraform 0.12.3 or higher - installed and configured with AWS access keys.
 3. A Snowflake account - use recommended configuration for the Connector for Apache Kafka as described in the Snowflake documentation.
 
 It is assumed that you are able to install and configure Terraform, configure credentials for AWS, and have a Snowflake account with the required privileges to perform the configuration of the Snowflake database and Snowflake Connector for Kafka.
@@ -35,7 +35,7 @@ Install the AWS CLI and configure it using [these instructions](<https://docs.aw
 
 ### Terraform
 
-Install Terraform and configure it using [these instructions](<https://learn.hashicorp.com/terraform/getting-started/install.html>).
+Install Terraform 0.12.3 or higher and configure it using [these instructions](<https://learn.hashicorp.com/terraform/getting-started/install.html>).
 
 ### Snowflake
 

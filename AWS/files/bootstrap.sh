@@ -78,3 +78,37 @@ sudo sed -i 's,key.converter.schema.registry.url=http://localhost:8081,key.conve
 sudo sed -i 's/value.converter=io.confluent.connect.avro.AvroConverter/value.converter=org.apache.kafka.connect.json.JsonConverter/' /etc/schema-registry/connect-avro-distributed.properties
 sudo sed -i 's,value.converter.schema.registry.url=http://localhost:8081,value.converter.schemas.enable=false,' /etc/schema-registry/connect-avro-distributed.properties
 
+cat > local-file-source-connector.json << "EOF"
+{
+    "name": "local-file-source",
+    "config": {
+        "connector.class": "FileStreamSource",
+        "tasks.max": 1,
+        "file": "/home/centos/strings.txt",
+        "topic": "demotopic",
+        "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+        "value.converter": "org.apache.kafka.connect.json.JsonConverter"
+  }
+}
+EOF
+
+cat > snowflake-connector.json << "EOF"
+{
+  "name":"snowflake",
+  "config":{
+    "connector.class":"com.snowflake.kafka.connector.SnowflakeSinkConnector",
+    "tasks.max":"8",
+    "topics":"demotopic",
+    "snowflake.topic2table.map": "demotopic:demotopic",
+    "buffer.count.records":"100",
+    "buffer.size.bytes":"65536",
+    "snowflake.url.name":"account.snowflakecomputing.com:443",
+    "snowflake.user.name":"kafka",
+    "snowflake.private.key":"key-on-a-single-line",
+    "snowflake.database.name":"database",
+    "snowflake.schema.name":"public",
+    "key.converter":"org.apache.kafka.connect.storage.StringConverter",
+    "value.converter":"com.snowflake.kafka.connector.records.SnowflakeJsonConverter"
+  }
+}
+EOF

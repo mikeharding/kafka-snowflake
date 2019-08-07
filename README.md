@@ -6,7 +6,7 @@
 
 Spin up a single node of Confluent Community components using Terraform.  
 
-### What is provided
+## What is provided
 
 A Terraform script to provision and configure an EC2 instance in AWS
 

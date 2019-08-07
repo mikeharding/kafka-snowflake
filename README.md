@@ -6,7 +6,11 @@
 
 Spin up a single node of Confluent Community components using Terraform.  
 
-A bash shell script is provided to configure the following components:
+### What is provided
+
+A Terraform script to provision and configure an EC2 instance in AWS
+
+A bash shell script to install and configure the following components:
 
 - Centos7 node for Confluent
 - Deploy the Snowflake Connector for Apache Kafka

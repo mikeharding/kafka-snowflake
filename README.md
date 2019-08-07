@@ -1,8 +1,6 @@
 # kafka-snowflake
 
-## Single Node Kafka for use with the Snowflake Connector for Apache Kafka
-
-### Description
+## Description
 
 Spin up a single node of Confluent Community components using Terraform.  
 

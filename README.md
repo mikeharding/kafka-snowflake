@@ -1,4 +1,4 @@
-# terraform-kafka-server
+# kafka-snowflake
 
 ## Single Node Kafka for use with the Snowflake Connector for Apache Kafka
 

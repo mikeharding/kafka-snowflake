@@ -1,7 +1,5 @@
 # kafka-snowflake
 
-## Description
-
 Spin up a single node of Confluent Community components using Terraform.  
 
 ## What is provided

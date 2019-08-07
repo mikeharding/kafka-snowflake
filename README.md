@@ -17,6 +17,14 @@ Once deployed and configured, the Snowflake Connector for Apache Kafka will cons
 
 Currently, the only cloud provider supported is AWS.
 
+## Architecture
+
+The following architecture diagram depicts the components used in this example.
+
+<p align="center">
+    <img width="500" height="auto" src="docs/images/architecture.png" alt="Architecture" />
+</p>
+
 ## Installation
 
 To run the examples, you will first need to install and configure, or have access, to the following software:

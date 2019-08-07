@@ -22,7 +22,7 @@ Currently, the only cloud provider supported is AWS.
 The following architecture diagram depicts the components used in this example.
 
 <p align="center">
-    <img width="500" height="auto" src="docs/images/architecture.png" alt="Architecture" />
+    <img width="600" height="auto" src="docs/images/architecture.png" alt="Architecture" />
 </p>
 
 ## Installation

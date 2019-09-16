@@ -15,7 +15,7 @@ variable "instance_type" {
 }
 
  variable "key_name" {
-   default = "ec2-keys:wq"
+   default = "ec2-keys"
 }
 
 // Set the path to the location of your public key

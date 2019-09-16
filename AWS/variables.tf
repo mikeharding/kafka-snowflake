@@ -14,8 +14,8 @@ variable "instance_type" {
   default = "m5a.xlarge"
 }
 
-variable "key_name" {
-  default = "terraform.pub"
+ variable "key_name" {
+   default = "ec2-keys:wq"
 }
 
 // Set the path to the location of your public key
